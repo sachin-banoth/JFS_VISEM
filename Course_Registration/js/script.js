@@ -1,6 +1,7 @@
 // Auto-calculate total fee
 let subjects = document.querySelectorAll(".subject");
 let totalBox = document.getElementById("total");
+let res = document.getElementById("res");
 
 subjects.forEach(item => {
     item.addEventListener("change", () => {
@@ -16,27 +17,23 @@ subjects.forEach(item => {
     });
 });
 
-// Optional: form submit
-document.getElementById("regForm").addEventListener("submit", function(e){
+// Form Submit
+document.getElementById("regForm").addEventListener("submit", function(e) {
     e.preventDefault();
-      e.preventDefault();
 
     let selectedSubjects = [];
     let totalFee = 0;
 
     subjects.forEach(sub => {
         if (sub.checked) {
-
-            // Get subject name from the label text
             let subjectName = sub.parentElement.innerText.trim();
             selectedSubjects.push(subjectName);
-
             totalFee += parseInt(sub.value);
         }
     });
 
     if (selectedSubjects.length === 0) {
-        alert("Please select at least one subject.");
+        res.innerText = "Please select at least one subject.";
         return;
     }
 
@@ -47,5 +44,5 @@ document.getElementById("regForm").addEventListener("submit", function(e){
         "Selected Subjects:\n- " + selectedSubjects.join("\n- ") + "\n\n" +
         "Total Fee: ₹" + totalFee;
 
-    alert(message);
+    res.innerText = message;  // Display only on the page
 });
